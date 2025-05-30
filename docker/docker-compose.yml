@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+
+  with-schema:
+    build: .
+    image: with-schema:1.0
+    ports:
+      - 3306:3306
+    container_name: db_deadline
+
+  adminer_container:
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: db_deadline
+      ADMINER_DESIGN: app
+    ports:
+      - 8080:8080
+    container_name: adminer_container
