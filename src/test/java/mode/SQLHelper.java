@@ -20,7 +20,7 @@ public class SQLHelper {
     }
 
     @SneakyThrows
-    public DbUtils.VerificationCode getVerificationCode() {
+    public static DbUtils.VerificationCode getVerificationCode() {
         var requestSQL = "SELECT code FROM auth_codes ORDER BY created DESC LIMIT 1";
         try (var conn = getConn()) {
             return QUERY_RUNNER.query(conn, codeSQL, new BeanHandler<>(DbUtils.VerificationCode.class));
@@ -39,8 +39,9 @@ public class SQLHelper {
 
 @SneakyThrows
 public static void cleanAuthCodes() {
-    try (var conn = getConn()) {
-        QUERY_RUNNER.execute(conn, "DELETE FROM auth_codes");
+    try (var conn = SQLHelper.getConn()) {
+        SQLHelper.QUERY_RUNNER.execute(conn, "DELETE FROM auth_codes");
     }
-}
+ }
+
 }

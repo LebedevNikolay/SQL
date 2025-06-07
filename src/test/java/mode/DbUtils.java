@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Locale;
 
 public class DbUtils {
-    private static final FAKER =new
+    private static final FAKER = new
 
     Faker(new Locale("en"));
 
