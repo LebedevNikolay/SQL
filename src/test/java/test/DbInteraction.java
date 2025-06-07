@@ -3,7 +3,6 @@ package test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import mode.DbUtils;
-import mode.User;
 import page.DashboardPage;
 import page.LoginPage;
 import page.VerificationPage;

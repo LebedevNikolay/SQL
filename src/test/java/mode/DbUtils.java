@@ -1,33 +1,53 @@
 package mode;
 
-import lombok.val;
+import com.github.javafaker.Faker;
+import lombok.*;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Locale;
 
 public class DbUtils {
-    public DbUtils() {
+    private static final FAKER =new
+
+    Faker(new Locale("en"));
+
+    private DbUtils() {
     }
 
-    public static String getVerificationCode() {
-        val codeSQL = "SELECT code FROM auth_codes WHERE created = (SELECT max(created) FROM auth_codes);";
-        val runner = new QueryRunner();
-        String verificationCode = "";
-
-        try (
-                val conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/app", "app", "pass"
-                );
-        ) {
-            val code = runner.query(conn, codeSQL, new ScalarHandler<>());
-            System.out.println(code);
-            verificationCode = (String) code;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return verificationCode;
+    public static String getAuthInfoWithTestData() {
+        return new AuthInfo("vasya", "qwerty123");
     }
+
+    private static String generateRandomLogin() {
+        return FAKER.name().username();
+    }
+
+    private static String generateRandomPassword() {
+        return FAKER.internet().password();
+    }
+
+    public static AuthInfo generateRandomUser() {
+        return new AuthInfo(generateRandomLogin(), generateRandomPassword());
+    }
+
+    public static VerificationCode generateRandomVerificationCode() {
+        return new VerificationCode(FAKER.numerify("######"));
+    }
+
+    @Value
+    public static class AuthInfo {
+        String login;
+        String password;
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class VerificationCode {
+        String code;
+    }
+
 }
