@@ -15,7 +15,7 @@ public class LoginPage {
     private SelenideElement loginButton = $("[data-test-id=action-login]");
     private SelenideElement errorNotification = $("[data-test-id='error-notification'] .notification__content");
 
-    public void verifyErrorerrorNotification(String expectedText) {
+    public void verifyErrorNotification(String expectedText) {
         errorNotification.shouldHave(exactText(expectedText)).shouldBe(visible);
     }
 

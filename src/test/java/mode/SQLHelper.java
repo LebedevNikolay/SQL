@@ -4,15 +4,16 @@ import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-
+import mode.DbUtils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 public class SQLHelper {
     private static final QueryRunner QUERY_RUNNER = new QueryRunner();
 
-    public SQLHelper() {
+    private SQLHelper() {
     }
 
     private static Connection getConn() throws SQLException {
@@ -21,7 +22,7 @@ public class SQLHelper {
 
     @SneakyThrows
     public static DbUtils.VerificationCode getVerificationCode() {
-        var requestSQL = "SELECT code FROM auth_codes ORDER BY created DESC LIMIT 1";
+        var codeSQL = "SELECT code FROM auth_codes ORDER BY created DESC LIMIT 1";
         try (var conn = getConn()) {
             return QUERY_RUNNER.query(conn, codeSQL, new BeanHandler<>(DbUtils.VerificationCode.class));
         }
@@ -39,9 +40,9 @@ public class SQLHelper {
 
 @SneakyThrows
 public static void cleanAuthCodes() {
-    try (var conn = SQLHelper.getConn()) {
-        SQLHelper.QUERY_RUNNER.execute(conn, "DELETE FROM auth_codes");
+    try (var conn = getConn()) {
+        QUERY_RUNNER.execute(conn, "DELETE FROM auth_codes");
     }
- }
+}
 
 }

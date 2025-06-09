@@ -10,14 +10,12 @@ import java.sql.SQLException;
 import java.util.Locale;
 
 public class DbUtils {
-    private static final FAKER = new
-
-    Faker(new Locale("en"));
+    private static final Faker FAKER = new Faker(new Locale("en"));
 
     private DbUtils() {
     }
 
-    public static String getAuthInfoWithTestData() {
+    public static AuthInfo getAuthInfoWithTestData() {
         return new AuthInfo("vasya", "qwerty123");
     }
 
