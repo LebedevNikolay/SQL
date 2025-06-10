@@ -16,6 +16,7 @@ public class SQLHelper {
     private SQLHelper() {
     }
 
+
     private static Connection getConn() throws SQLException {
         return DriverManager.getConnection(System.getProperty("db.url"), "app", "pass");
     }
@@ -36,13 +37,11 @@ public class SQLHelper {
         QUERY_RUNNER.execute(conn, "DELETE FROM cards");
         QUERY_RUNNER.execute(conn, "DELETE FROM users");
     }
-}
 
-@SneakyThrows
-public static void cleanAuthCodes() {
-    try (var conn = getConn()) {
-        QUERY_RUNNER.execute(conn, "DELETE FROM auth_codes");
+    @SneakyThrows
+    public static void cleanAuthCodes() {
+        try (var conn = getConn()) {
+            QUERY_RUNNER.execute(conn, "DELETE FROM auth_codes");
+        }
     }
-}
-
 }

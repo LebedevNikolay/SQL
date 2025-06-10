@@ -7,10 +7,11 @@ import page.LoginPage;
 import page.VerificationPage;
 import mode.SQLHelper;
 
-import public static class SQLHelper.cleanAuthCodes;
-
-import public static class SQLHelper.cleanDatabase;
 import static com.codeborne.selenide.Selenide.open;
+import static mode.SQLHelper.cleanAuthCodes;
+import static mode.SQLHelper.cleanDatabase;
+
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DbInteraction {
@@ -18,7 +19,7 @@ public class DbInteraction {
     DbUtils.AuthInfo authInfo = DbUtils.getAuthInfoWithTestData();
 
     @AfterAll
-    void tearDownAll()  {
+    static void tearDownAll()  {
         cleanDatabase();
     }
 
