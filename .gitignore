@@ -3,7 +3,6 @@ Thumbs.db*
 HELP.md
 .gradle
 build/
-cov/
 
 ### STS ###
 .apt_generated
@@ -30,7 +29,6 @@ out/
 
 ### VS Code ###
 .vscode/
-*.log
 
 ### Package Files ###
 *.jar
