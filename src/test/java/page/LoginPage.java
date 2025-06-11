@@ -23,6 +23,7 @@ public class LoginPage {
         login(info);
         return new VerificationPage();
     }
+
     public void login(DbUtils.AuthInfo info) {
         loginField.setValue(info.getLogin());
         passwordField.setValue(info.getPassword());
